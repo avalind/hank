@@ -1,4 +1,5 @@
 #include <utility>
+#include <cmath>
 #include "draw.h"
 
 
@@ -36,7 +37,27 @@ bool line(TGAImage &im, int x0, int y0, int x1, int y1, int color) {
     } else if (x0 == x1) {
         return _draw_vertical(im, x0, y0, x1, y1, color);
     } else {
-
+        int dx = std::abs(x1 - x0);
+        int sx = x0 < x1 ? 1 : -1;
+        int dy = -std::abs(y1 - y0);
+        int sy = y0 < y1 ? 1 : -1;
+        int error = dx + dy;
+        int error2;
+        while(true) {
+            im.put_pixel(x0, y0, color);
+            if(x0 == x1 && y0 == y1) {
+                return true;
+            }
+            error2 = 2 * error;
+            if(error2 > dy) {
+                error += dy;
+                x0 += sx;
+            }
+            if(error2 <= dx) {
+                error += dx;
+                y0 += sy;
+            }
+        }
     }
     return true;
 }
