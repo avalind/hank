@@ -3,6 +3,7 @@
 #include "tga.h"
 #include "draw.h"
 #include "vector.h"
+#include "geometry.h"
 
 
 template <typename T, unsigned int N>
@@ -17,6 +18,7 @@ int main(int argc, char **argv) {
     //hank::Vector3<float> position = 2.0 * origo;
 
 
+    /*
     hank::Vector<int, 2> i2vec({1,2});
     std::cout << i2vec << std::endl;
     
@@ -25,7 +27,9 @@ int main(int argc, char **argv) {
     
     if(is_perpendicular(f4u, f4v)) {
         std::cout << "Now it's time for lunch!" << std::endl;
-    }
+    }*/
+
+    hank::Triangle<int> tri = hank::make_2d_triangle<int>(1,2,30,31,45,46);
 
     /*hank::TGAImage im(400, 400);
     im.fill(hank::rgb(0,0,0));
