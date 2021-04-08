@@ -1,15 +1,18 @@
+#include "vector.h"
 #include "geometry.h"
 
 namespace hank{
 
 template <typename T>
-Rectangle<T> find_bounding_box(const Triangle<T> &triangle) {
+Rectangle<T> find_bounding_box(Triangle<T> &triangle) {
     Vector<T, 2> rightmost;
     Vector<T, 2> leftmost;
     Vector<T, 2> top;
     Vector<T, 2> bottom;
     T width;
     T height;
+    T ulx;
+    T uly;
 
     if(triangle.a[0] > triangle.b[0] ) {
         if(triangle.c[0] > triangle.a[0]) {
@@ -41,10 +44,44 @@ Rectangle<T> find_bounding_box(const Triangle<T> &triangle) {
         }
     };
 
+    if(triangle.a[1] > triangle.b[1]) {
+        if(triangle.c[1] > triangle.a[1]) {
+            top = triangle.c;
+            bottom = triangle.b;
+        } else {
+            top = triangle.a;
+            if(triangle.b[1] < triangle.c[1]) {
+                bottom = triangle.b;
+            } else {
+                bottom = triangle.c;
+            }
+        }
+
+    } else {
+        if(triangle.b[1] > triangle.c[1]) {
+            top = triangle.b;
+            if(triangle.a[1] < triangle.c[1]) {
+                bottom = triangle.a;
+            } else {
+                bottom = triangle.c;
+            }
+        } else {
+            bottom = triangle.a;
+            top = triangle.c;
+        }
+    }
+
     width = (rightmost - leftmost)[0];
+    height = (top - bottom)[1];
+    ulx = leftmost[0];
+    uly = top[1];
 
     return Rectangle<T>(ulx, uly, width, height);
 };
 
+// Instantiation tricks
+template Rectangle<int> find_bounding_box(Triangle<int> &triangle);
+template Rectangle<float> find_bounding_box(Triangle<float> &triangle);
+template Rectangle<double> find_bounding_box(Triangle<double> &triangle);
 
 };

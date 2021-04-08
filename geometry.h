@@ -43,7 +43,7 @@ struct Rectangle {
 };
 
 template <typename T>
-Rectangle<T> find_bounding_box(const Triangle<T>& triangle);
+Rectangle<T> find_bounding_box(Triangle<T> &triangle);
 
 };
 

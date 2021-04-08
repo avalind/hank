@@ -1,6 +1,7 @@
 #include <utility>
 #include <cmath>
 #include "draw.h"
+#include "geometry.h"
 
 
 namespace hank {
@@ -59,6 +60,42 @@ bool line(TGAImage &im, int x0, int y0, int x1, int y1, int color) {
             }
         }
     }
+    return true;
+}
+
+bool draw(TGAImage &im, Rectangle<int> &rect, int color) {
+    bool retcode;
+    retcode = line(im, 
+        rect.upper_left[0],
+        rect.upper_left[1],
+        rect.upper_left[0] + rect.width,
+        rect.upper_left[1],
+        color);
+
+    retcode = line(im,
+        rect.upper_left[0] + rect.width,
+        rect.upper_left[1],
+        rect.upper_left[0] + rect.width,
+        rect.upper_left[1] - rect.height,
+        color);
+
+    retcode = line(im,
+        rect.upper_left[0] + rect.width,
+        rect.upper_left[1] - rect.height,
+        rect.upper_left[0],
+        rect.upper_left[0] - rect.height,
+        color);
+
+    retcode = line(im,
+        rect.upper_left[0],
+        rect.upper_left[0] - rect.height,
+        rect.upper_left[0],
+        rect.upper_left[1],
+        color);
+    return retcode;
+};
+
+bool draw(TGAImage& im, Triangle<int> &rect, int color) {
     return true;
 }
 
