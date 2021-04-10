@@ -29,20 +29,17 @@ int main(int argc, char **argv) {
         std::cout << "Now it's time for lunch!" << std::endl;
     }*/
 
-    hank::Triangle<int> tri = hank::make_2d_triangle<int>(200+1,200+2,200+30,200+31,200+45,200+46);
+    hank::Triangle<int> tri = hank::make_2d_triangle<int>(50+1,50+7,250+30,150+31,150+45,200+46);
 
     hank::Rectangle<int> bb = hank::find_bounding_box<int>(tri);
 
-    hank::TGAImage im(400, 400);
+    hank::TGAImage im(600, 600);
     im.fill(hank::rgb(0,0,0));
 
+    hank::draw(im, tri, hank::rgb(125,0, 255));
     hank::draw(im, bb, hank::rgb(255, 0, 255));
-//    hank::line(im, 100,100,300,300, hank::rgb(255,0,0));
-//    hank::line(im, 50, 75, 363, 213, hank::rgb(0,255,0));
     im.to_file("test.tga");
     
-
-    //std::cout << position << std::endl;
 
     return 0;
 }

@@ -45,6 +45,12 @@ struct Rectangle {
 template <typename T>
 Rectangle<T> find_bounding_box(Triangle<T> &triangle);
 
+template <typename T>
+bool is_within(Triangle<T>& triangle, T& width, T& height);
+
+template <typename T>
+bool is_within(Rectangle<T>& rect, T& width, T& height);
+
 };
 
 #endif /* GEOMETRY_H_ */

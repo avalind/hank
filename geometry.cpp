@@ -4,6 +4,22 @@
 namespace hank{
 
 template <typename T>
+bool is_within(Triangle<T>& triangle, T& width, T& height) {
+    // tests whether the geometric primitive is inside a 
+    // given rectangle defined by (0,0) and (width, height)
+    bool within = true;
+    within &= 
+        (triangle.a[0] < width) &&
+        (triangle.b[0] < width) &&
+        (triangle.c[0] < width);
+    within &=
+        (triangle.a[1] < height) &&
+        (triangle.b[1] < height) &&
+        (triangle.c[1] < height);
+    return within;    
+}
+
+template <typename T>
 Rectangle<T> find_bounding_box(Triangle<T> &triangle) {
     Vector<T, 2> rightmost;
     Vector<T, 2> leftmost;

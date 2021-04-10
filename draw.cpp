@@ -83,20 +83,42 @@ bool draw(TGAImage &im, Rectangle<int> &rect, int color) {
         rect.upper_left[0] + rect.width,
         rect.upper_left[1] - rect.height,
         rect.upper_left[0],
-        rect.upper_left[0] - rect.height,
+        rect.upper_left[1] - rect.height,
         color);
 
     retcode = line(im,
         rect.upper_left[0],
-        rect.upper_left[0] - rect.height,
+        rect.upper_left[1] - rect.height,
         rect.upper_left[0],
         rect.upper_left[1],
         color);
     return retcode;
 };
 
-bool draw(TGAImage& im, Triangle<int> &rect, int color) {
-    return true;
+bool draw(TGAImage& im, Triangle<int> &tri, int color) {
+    bool retcode = line(im,
+        tri.a[0],
+        tri.a[1],
+        tri.b[0],
+        tri.b[1],
+        color);
+    retcode = line(im,
+        tri.b[0],
+        tri.b[1],
+        tri.c[0],
+        tri.c[1],
+        color);
+    retcode = line(im,
+        tri.c[0],
+        tri.c[1],
+        tri.a[0],
+        tri.a[1],
+        color);
+    return retcode;
+}
+
+bool draw_filled(TGAImage& im, Triangle<int> &tri, int color) {
+    
 }
 
 }
